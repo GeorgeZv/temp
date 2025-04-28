@@ -1,0 +1,1849 @@
+;;; (locale=English_United States.Cp1252@Binary)
+;;; (Name=rDESadvs97aasiaoos.mdl)
+;;; (Version=5.3)
+;;; (Type=SOURCE)
+;;; (Access=OTEFTS.acc)
+;;; (Model Category=Traditional)
+;;; (Model Checksum=118299076)
+;;; (Modified= Wed Apr 23 17:17:12 IST 2025)
+;;; (By user= C23691)
+;;; (c) Copyright 2005 GXS
+Initialization { 
+[]
+VAR->OTMdlVer = "StdVer 3.1 - Do Not Remove This Line"
+PERFORM("OTSrcInit", "STD|EFT|97.A", "EFT")
+
+[]
+VAR->OTIDsInherit = "Yes"
+
+[ ]
+	VAR->SPACE = " "
+
+[]
+	VAR->OTArchiveDir = "./archive/"
+
+	VAR->OTCopy = "cp "
+
+[]
+		VAR->SESSION_NO = VAR->OTSessionNo
+
+[ ] ; retrieve e-mail address for Tech. Support group...
+        VAR->EmailAddressPROD = ""
+        SET_EVAR("XREF_KEY", "STD")
+        VAR->XrefStatus = XREF("EMAIL", "AVNET-ASIA", &VAR->EmailAddressPROD,"N")
+
+}*1 .. 1 ;; |-- end Initialization --|
+Msg_DESADV_GROUP_1 { 
+  BGM { Segment  "BGM"
+  BGM_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end BGM_set --|
+  BGM_01_C002 { Composite 
+  BGM_01_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end BGM_01_set --|
+  BGM_01_01_1001 { BegComponentAN @1 .. 3  v1001 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &BGM_01_01_1001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end BGM_01_01_1001 --|
+  BGM_01_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &BGM_01_02_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end BGM_01_02_1131 --|
+  BGM_01_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &BGM_01_03_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end BGM_01_03_3055 --|
+  BGM_01_04_1000 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end BGM_01_04_1000 --|
+  }*0 .. 1 ;; |-- end BGM_01_C002 --|
+  BGM_02_C106 { Composite 
+  BGM_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end BGM_02_set --|
+  BGM_02_01_1004 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end BGM_02_01_1004 --|
+  BGM_02_02_1056 { ComponentAN @1 .. 9  none 
+  }*0 .. 1 ;; |-- end BGM_02_02_1056 --|
+  BGM_02_03_1060 { ComponentAN @1 .. 6  none 
+  }*0 .. 1 ;; |-- end BGM_02_03_1060 --|
+  }*0 .. 1 ;; |-- end BGM_02_C106 --|
+  BGM_03_1225 { ElementAN @1 .. 3  v1225 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &BGM_03_1225)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end BGM_03_1225 --|
+  BGM_04_4343 { ElementAN @1 .. 3  v4343 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &BGM_04_4343)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end BGM_04_4343 --|
+  [ ]
+	VAR->ASN_NO = BGM_02_01_1004
+
+  :ERROR
+  [] ; to capture Defining error
+VAR->OTCodeErr  = ERRCODE()
+VAR->OTMatchErr = LAST_MATCH()
+VAR->OTDefErr   = LAST_DEFINING()
+VAR->OTDefSeqNo = GET_ECOUNT(6)
+VAR->OTTagErr   = LAST_TAG()
+VAR->OTTagSeqNo = GET_ECOUNT(1)
+
+[ VAR->OTCntFlg == "No" ]
+EXIT 50
+
+[ VAR->OTCntFlg == "Yes" ]
+VAR->OTCntErr   = LAST_CONTAINER()
+VAR->OTCntSeqNo = GET_ECOUNT(7)
+EXIT 507
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end BGM --|
+  DTM { Segment  "DTM"
+  DTM_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end DTM_set --|
+  DTM_01_C507 { Composite 
+  DTM_01_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end DTM_01_set --|
+  DTM_01_01_2005 { BegComponentAN @1 .. 3  v2005 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &DTM_01_01_2005)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end DTM_01_01_2005 --|
+  DTM_01_02_2380 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end DTM_01_02_2380 --|
+  DTM_01_03_2379 { ComponentAN @1 .. 3  v2379 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &DTM_01_03_2379)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end DTM_01_03_2379 --|
+  }*1 .. 1 ;; |-- end DTM_01_C507 --|
+  [DTM_01_01_2005 == "11" && DTM_01_03_2379 == "203"]
+	VAR->ASN_SHIP_DATE = STRSUBS (DTM_01_02_2380,1,8)
+	VAR->ASN_SHIP_TIME = STRSUBS (DTM_01_02_2380,9,12)
+	VAR->ASN_SHIP_TIME_SAP = STRCAT (VAR->ASN_SHIP_TIME,"00")
+
+[DTM_01_01_2005 == "132" && DTM_01_03_2379 == "203"]
+	VAR->ASN_ETA_DATE = STRSUBS (DTM_01_02_2380,1,8)
+
+[DTM_01_01_2005 == "137" && DTM_01_03_2379 == "203"]
+	VAR->ASN_DOC_DATE = STRSUBS (DTM_01_02_2380,1,8)
+
+  }*1 .. 3 ;; |-- end DTM --|
+  MEA { Segment  "MEA"
+  MEA_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_set --|
+  MEA_01_6311 { ElementAN @1 .. 3  v6311 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_01_6311)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_01_6311 --|
+  MEA_02_C502 { Composite 
+  MEA_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_02_set --|
+  MEA_02_01_6313 { BegComponentAN @1 .. 3  v6313 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_02_01_6313)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_02_01_6313 --|
+  MEA_02_02_6321 { ComponentAN @1 .. 3  v6321 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_02_02_6321)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_02_02_6321 --|
+  MEA_02_03_6155 { ComponentAN @1 .. 17  v6155 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_02_03_6155)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_02_03_6155 --|
+  MEA_02_04_6154 { ComponentAN @1 .. 70  none 
+  }*0 .. 1 ;; |-- end MEA_02_04_6154 --|
+  }*0 .. 1 ;; |-- end MEA_02_C502 --|
+  MEA_03_C174 { Composite 
+  MEA_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_03_set --|
+  MEA_03_01_6411 { BegComponentAN @1 .. 3  none 
+  }*1 .. 1 ;; |-- end MEA_03_01_6411 --|
+  MEA_03_02_6314 { ComponentAN @1 .. 18  none 
+  }*0 .. 1 ;; |-- end MEA_03_02_6314 --|
+  MEA_03_03_6162 { ComponentN @1 .. 18 "N0RRRRRRRRRRRRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end MEA_03_03_6162 --|
+  MEA_03_04_6152 { ComponentN @1 .. 18 "N0RRRRRRRRRRRRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end MEA_03_04_6152 --|
+  MEA_03_05_6432 { ComponentN @1 .. 2 "N0RR:1" none 
+  }*0 .. 1 ;; |-- end MEA_03_05_6432 --|
+  }*0 .. 1 ;; |-- end MEA_03_C174 --|
+  MEA_04_7383 { ElementAN @1 .. 3  v7383 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_04_7383)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_04_7383 --|
+  [MEA_01_6311 == "CT" && MEA_03_01_6411 == "NMP"]
+	VAR->PACKAGE = MEA_03_02_6314
+
+  }*1 .. 5 ;; |-- end MEA --|
+  RFF_GROUP_2 { 
+  RFF { Segment  "RFF"
+  RFF_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end RFF_set --|
+  RFF_01_C506 { Composite 
+  RFF_01_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end RFF_01_set --|
+  RFF_01_01_1153 { BegComponentAN @1 .. 3  v1153 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &RFF_01_01_1153)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end RFF_01_01_1153 --|
+  RFF_01_02_1154 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end RFF_01_02_1154 --|
+  RFF_01_03_1156 { ComponentAN @1 .. 6  none 
+  }*0 .. 1 ;; |-- end RFF_01_03_1156 --|
+  RFF_01_04_4000 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end RFF_01_04_4000 --|
+  }*1 .. 1 ;; |-- end RFF_01_C506 --|
+  [RFF_01_01_1153 == "AWB"]			;;; Airway Bill Number
+    	VAR->AIRWAY_BILL_NUMBER = RFF_01_02_1154
+
+  }*1 .. 1 ;; |-- end RFF --|
+  }*0 .. 10 ;; |-- end RFF_GROUP_2 --|
+  NAD_GROUP_3 { 
+  NAD { Segment  "NAD"
+  NAD_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end NAD_set --|
+  NAD_01_3035 { ElementAN @1 .. 3  v3035 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &NAD_01_3035)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end NAD_01_3035 --|
+  NAD_02_C082 { Composite 
+  NAD_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end NAD_02_set --|
+  NAD_02_01_3039 { BegComponentAN @1 .. 17  none 
+  }*1 .. 1 ;; |-- end NAD_02_01_3039 --|
+  NAD_02_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &NAD_02_02_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end NAD_02_02_1131 --|
+  NAD_02_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &NAD_02_03_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end NAD_02_03_3055 --|
+  }*0 .. 1 ;; |-- end NAD_02_C082 --|
+  NAD_03_C058 { Composite 
+  NAD_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end NAD_03_set --|
+  NAD_03_01_3124 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end NAD_03_01_3124 --|
+  NAD_03_02_3124 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_03_02_3124 --|
+  NAD_03_03_3124 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_03_03_3124 --|
+  NAD_03_04_3124 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_03_04_3124 --|
+  NAD_03_05_3124 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_03_05_3124 --|
+  }*0 .. 1 ;; |-- end NAD_03_C058 --|
+  NAD_04_C080 { Composite 
+  NAD_04_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end NAD_04_set --|
+  NAD_04_01_3036 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end NAD_04_01_3036 --|
+  NAD_04_02_3036 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_04_02_3036 --|
+  NAD_04_03_3036 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_04_03_3036 --|
+  NAD_04_04_3036 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_04_04_3036 --|
+  NAD_04_05_3036 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_04_05_3036 --|
+  NAD_04_06_3045 { ComponentAN @1 .. 3  v3045 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &NAD_04_06_3045)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end NAD_04_06_3045 --|
+  }*0 .. 1 ;; |-- end NAD_04_C080 --|
+  NAD_05_C059 { Composite 
+  NAD_05_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end NAD_05_set --|
+  NAD_05_01_3042 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end NAD_05_01_3042 --|
+  NAD_05_02_3042 { ComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end NAD_05_02_3042 --|
+  NAD_05_03_3042 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_05_03_3042 --|
+  NAD_05_04_3042 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_05_04_3042 --|
+  }*0 .. 1 ;; |-- end NAD_05_C059 --|
+  NAD_06_3164 { ElementAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end NAD_06_3164 --|
+  NAD_07_3229 { ElementAN @1 .. 9  none 
+  }*0 .. 1 ;; |-- end NAD_07_3229 --|
+  NAD_08_3251 { ElementAN @1 .. 9  none 
+  }*0 .. 1 ;; |-- end NAD_08_3251 --|
+  NAD_09_3207 { ElementAN @1 .. 9  none 
+  }*0 .. 1 ;; |-- end NAD_09_3207 --|
+  }*1 .. 1 ;; |-- end NAD --|
+  }*1 .. 10 ;; |-- end NAD_GROUP_3 --|
+  TOD_GROUP_6 { 
+  TOD { Segment  "TOD"
+  TOD_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TOD_set --|
+  TOD_01_4055 { ElementAN @1 .. 3  v4055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TOD_01_4055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TOD_01_4055 --|
+  TOD_02_4215 { ElementAN @1 .. 3  v4215 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TOD_02_4215)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TOD_02_4215 --|
+  TOD_03_C100 { Composite 
+  TOD_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TOD_03_set --|
+  TOD_03_01_4053 { BegComponentAN @1 .. 3  none 
+  }*0 .. 1 ;; |-- end TOD_03_01_4053 --|
+  TOD_03_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TOD_03_02_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TOD_03_02_1131 --|
+  TOD_03_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TOD_03_03_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TOD_03_03_3055 --|
+  TOD_03_04_4052 { ComponentAN @1 .. 70  none 
+  }*0 .. 1 ;; |-- end TOD_03_04_4052 --|
+  TOD_03_05_4052 { ComponentAN @1 .. 70  none 
+  }*0 .. 1 ;; |-- end TOD_03_05_4052 --|
+  }*0 .. 1 ;; |-- end TOD_03_C100 --|
+  }*1 .. 1 ;; |-- end TOD --|
+  }*0 .. 10 ;; |-- end TOD_GROUP_6 --|
+  TDT_GROUP_7 { 
+  TDT { Segment  "TDT"
+  TDT_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_set --|
+  TDT_01_8051 { ElementAN @1 .. 3  v8051 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_01_8051)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_01_8051 --|
+  TDT_02_8028 { ElementAN @1 .. 17  none 
+  }*0 .. 1 ;; |-- end TDT_02_8028 --|
+  TDT_03_C220 { Composite 
+  TDT_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_03_set --|
+  TDT_03_01_8067 { BegComponentAN @1 .. 3  none 
+  }*0 .. 1 ;; |-- end TDT_03_01_8067 --|
+  TDT_03_02_8066 { ComponentAN @1 .. 17  none 
+  }*0 .. 1 ;; |-- end TDT_03_02_8066 --|
+  }*0 .. 1 ;; |-- end TDT_03_C220 --|
+  TDT_04_C228 { Composite 
+  TDT_04_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_04_set --|
+  TDT_04_01_8179 { BegComponentAN @1 .. 8  v8179 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_04_01_8179)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TDT_04_01_8179 --|
+  TDT_04_02_8178 { ComponentAN @1 .. 17  none 
+  }*0 .. 1 ;; |-- end TDT_04_02_8178 --|
+  }*0 .. 1 ;; |-- end TDT_04_C228 --|
+  TDT_05_C040 { Composite 
+  TDT_05_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_05_set --|
+  TDT_05_01_3127 { BegComponentAN @1 .. 17  none 
+  }*0 .. 1 ;; |-- end TDT_05_01_3127 --|
+  TDT_05_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_05_02_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TDT_05_02_1131 --|
+  TDT_05_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_05_03_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TDT_05_03_3055 --|
+  TDT_05_04_3128 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end TDT_05_04_3128 --|
+  }*0 .. 1 ;; |-- end TDT_05_C040 --|
+  TDT_06_8101 { ElementAN @1 .. 3  v8101 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_06_8101)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TDT_06_8101 --|
+  TDT_07_C401 { Composite 
+  TDT_07_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_07_set --|
+  TDT_07_01_8457 { BegComponentAN @1 .. 3  v8457 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_07_01_8457)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_07_01_8457 --|
+  TDT_07_02_8459 { ComponentAN @1 .. 3  v8459 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_07_02_8459)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_07_02_8459 --|
+  TDT_07_03_7130 { ComponentAN @1 .. 17  none 
+  }*0 .. 1 ;; |-- end TDT_07_03_7130 --|
+  }*0 .. 1 ;; |-- end TDT_07_C401 --|
+  TDT_08_C222 { Composite 
+  TDT_08_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end TDT_08_set --|
+  TDT_08_01_8213 { BegComponentAN @1 .. 9  none 
+  }*0 .. 1 ;; |-- end TDT_08_01_8213 --|
+  TDT_08_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_08_02_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TDT_08_02_1131 --|
+  TDT_08_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_08_03_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TDT_08_03_3055 --|
+  TDT_08_04_8212 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end TDT_08_04_8212 --|
+  TDT_08_05_8453 { ComponentAN @1 .. 3  none 
+  }*0 .. 1 ;; |-- end TDT_08_05_8453 --|
+  }*0 .. 1 ;; |-- end TDT_08_C222 --|
+  TDT_09_8281 { ElementAN @1 .. 3  v8281 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &TDT_09_8281)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end TDT_09_8281 --|
+  }*1 .. 1 ;; |-- end TDT --|
+  }*0 .. 10 ;; |-- end TDT_GROUP_7 --|
+  CPS_GROUP_11 { 
+  CPS { Segment  "CPS"
+  CPS_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end CPS_set --|
+  CPS_01_7164 { ElementAN @1 .. 12  none 
+  }*1 .. 1 ;; |-- end CPS_01_7164 --|
+  CPS_02_7166 { ElementAN @1 .. 12  none 
+  }*0 .. 1 ;; |-- end CPS_02_7166 --|
+  CPS_03_7075 { ElementAN @1 .. 3  v7075 
+  [] ; assign after ID code verification
+
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end CPS_03_7075 --|
+  }*1 .. 1 ;; |-- end CPS --|
+  PAC_GROUP_12 { 
+  PAC { Segment  "PAC"
+  PAC_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PAC_set --|
+  PAC_01_7224 { ElementN @1 .. 8 "N0RRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end PAC_01_7224 --|
+  PAC_02_C531 { Composite 
+  PAC_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PAC_02_set --|
+  PAC_02_01_7075 { BegComponentAN @1 .. 3  v7075 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_02_01_7075)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_02_01_7075 --|
+  PAC_02_02_7233 { ComponentAN @1 .. 3  v7233 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_02_02_7233)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_02_02_7233 --|
+  PAC_02_03_7073 { ComponentAN @1 .. 3  v7073 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_02_03_7073)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_02_03_7073 --|
+  }*0 .. 1 ;; |-- end PAC_02_C531 --|
+  PAC_03_C202 { Composite 
+  PAC_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PAC_03_set --|
+  PAC_03_01_7065 { BegComponentAN @1 .. 17  none 
+  }*0 .. 1 ;; |-- end PAC_03_01_7065 --|
+  PAC_03_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_03_02_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_03_02_1131 --|
+  PAC_03_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_03_03_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_03_03_3055 --|
+  PAC_03_04_7064 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PAC_03_04_7064 --|
+  }*0 .. 1 ;; |-- end PAC_03_C202 --|
+  PAC_04_C402 { Composite 
+  PAC_04_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PAC_04_set --|
+  PAC_04_01_7077 { BegComponentAN @1 .. 3  v7077 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_04_01_7077)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PAC_04_01_7077 --|
+  PAC_04_02_7064 { ComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end PAC_04_02_7064 --|
+  PAC_04_03_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_04_03_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_04_03_7143 --|
+  PAC_04_04_7064 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PAC_04_04_7064 --|
+  PAC_04_05_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_04_05_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_04_05_7143 --|
+  }*0 .. 1 ;; |-- end PAC_04_C402 --|
+  PAC_05_C532 { Composite 
+  PAC_05_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PAC_05_set --|
+  PAC_05_01_8395 { BegComponentAN @1 .. 3  v8395 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_05_01_8395)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_05_01_8395 --|
+  PAC_05_02_8393 { ComponentAN @1 .. 3  v8393 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PAC_05_02_8393)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PAC_05_02_8393 --|
+  }*0 .. 1 ;; |-- end PAC_05_C532 --|
+  }*1 .. 99 ;; |-- end PAC --|
+  PCI_GROUP_14 { 
+  PCI { Segment  "PCI"
+  PCI_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PCI_set --|
+  PCI_01_4233 { ElementAN @1 .. 3  v4233 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PCI_01_4233)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PCI_01_4233 --|
+  PCI_02_C210 { Composite 
+  PCI_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PCI_02_set --|
+  PCI_02_01_7102 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end PCI_02_01_7102 --|
+  PCI_02_02_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_02_7102 --|
+  PCI_02_03_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_03_7102 --|
+  PCI_02_04_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_04_7102 --|
+  PCI_02_05_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_05_7102 --|
+  PCI_02_06_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_06_7102 --|
+  PCI_02_07_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_07_7102 --|
+  PCI_02_08_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_08_7102 --|
+  PCI_02_09_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_09_7102 --|
+  PCI_02_10_7102 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PCI_02_10_7102 --|
+  }*0 .. 1 ;; |-- end PCI_02_C210 --|
+  PCI_03_8275 { ElementAN @1 .. 3  v8275 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PCI_03_8275)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PCI_03_8275 --|
+  PCI_04_C827 { Composite 
+  PCI_04_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PCI_04_set --|
+  PCI_04_01_7511 { BegComponentAN @1 .. 3  none 
+  }*1 .. 1 ;; |-- end PCI_04_01_7511 --|
+  PCI_04_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PCI_04_02_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PCI_04_02_1131 --|
+  PCI_04_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PCI_04_03_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PCI_04_03_3055 --|
+  }*0 .. 1 ;; |-- end PCI_04_C827 --|
+  }*1 .. 1 ;; |-- end PCI --|
+  GIN_GROUP_21 { 
+  GIN { Segment  "GIN"
+  GIN_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_set --|
+  GIN_01_7405 { ElementAN @1 .. 3  v7405 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &GIN_01_7405)
+
+  }*1 .. 1 ;; |-- end GIN_01_7405 --|
+  GIN_02_C208 { Composite 
+  GIN_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_02_set --|
+  GIN_02_01_7402 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_02_01_7402 --|
+  GIN_02_02_7402 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_02_02_7402 --|
+  }*1 .. 1 ;; |-- end GIN_02_C208 --|
+  GIN_03_C208 { Composite 
+  GIN_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_03_set --|
+  GIN_03_01_7402 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_03_01_7402 --|
+  GIN_03_02_7402 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_03_02_7402 --|
+  }*0 .. 1 ;; |-- end GIN_03_C208 --|
+  GIN_04_C208 { Composite 
+  GIN_04_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_04_set --|
+  GIN_04_01_7402 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_04_01_7402 --|
+  GIN_04_02_7402 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_04_02_7402 --|
+  }*0 .. 1 ;; |-- end GIN_04_C208 --|
+  GIN_05_C208 { Composite 
+  GIN_05_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_05_set --|
+  GIN_05_01_7402 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_05_01_7402 --|
+  GIN_05_02_7402 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_05_02_7402 --|
+  }*0 .. 1 ;; |-- end GIN_05_C208 --|
+  GIN_06_C208 { Composite 
+  GIN_06_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_06_set --|
+  GIN_06_01_7402 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_06_01_7402 --|
+  GIN_06_02_7402 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_06_02_7402 --|
+  }*0 .. 1 ;; |-- end GIN_06_C208 --|
+  }*1 .. 1 ;; |-- end GIN --|
+  }*0 .. 99 ;; |-- end GIN_GROUP_21 --|
+  }*0 .. 99 ;; |-- end PCI_GROUP_14 --|
+  }*0 .. 9999 ;; |-- end PAC_GROUP_12 --|
+  LIN_GROUP_15 { 
+  LIN { Segment  "LIN"
+  LIN_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end LIN_set --|
+  LIN_01_1082 { ElementAN @1 .. 6  none 
+  }*0 .. 1 ;; |-- end LIN_01_1082 --|
+  LIN_02_1229 { ElementAN @1 .. 3  v1229 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_02_1229)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_02_1229 --|
+  LIN_03_C212 { Composite 
+  LIN_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end LIN_03_set --|
+  LIN_03_01_7140 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end LIN_03_01_7140 --|
+  LIN_03_02_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_03_02_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_03_02_7143 --|
+  LIN_03_03_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_03_03_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_03_03_1131 --|
+  LIN_03_04_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_03_04_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_03_04_3055 --|
+  }*0 .. 1 ;; |-- end LIN_03_C212 --|
+  LIN_04_C829 { Composite 
+  LIN_04_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end LIN_04_set --|
+  LIN_04_01_5495 { BegComponentAN @1 .. 3  v5495 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_04_01_5495)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_04_01_5495 --|
+  LIN_04_02_1082 { ComponentAN @1 .. 6  none 
+  }*0 .. 1 ;; |-- end LIN_04_02_1082 --|
+  }*0 .. 1 ;; |-- end LIN_04_C829 --|
+  LIN_05_1222 { ElementN @1 .. 2 "N0RR:1" none 
+  }*0 .. 1 ;; |-- end LIN_05_1222 --|
+  LIN_06_7083 { ElementAN @1 .. 3  v7083 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_06_7083)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_06_7083 --|
+  [LIN_03_02_7143 == "BP"]
+	VAR->BP = LIN_03_01_7140
+
+  }*1 .. 1 ;; |-- end LIN --|
+  PIA { Segment  "PIA"
+  PIA_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_set --|
+  PIA_01_4347 { ElementAN @1 .. 3  v4347 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_01_4347)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_01_4347 --|
+  PIA_02_C212 { Composite 
+  PIA_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_02_set --|
+  PIA_02_01_7140 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_02_01_7140 --|
+  PIA_02_02_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_02_02_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_02_02_7143 --|
+  PIA_02_03_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_02_03_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_02_03_1131 --|
+  PIA_02_04_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_02_04_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_02_04_3055 --|
+  }*1 .. 1 ;; |-- end PIA_02_C212 --|
+  PIA_03_C212 { Composite 
+  PIA_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_03_set --|
+  PIA_03_01_7140 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_03_01_7140 --|
+  PIA_03_02_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_03_02_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_03_02_7143 --|
+  PIA_03_03_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_03_03_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_03_03_1131 --|
+  PIA_03_04_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_03_04_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_03_04_3055 --|
+  }*0 .. 1 ;; |-- end PIA_03_C212 --|
+  PIA_04_C212 { Composite 
+  PIA_04_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_04_set --|
+  PIA_04_01_7140 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_04_01_7140 --|
+  PIA_04_02_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_04_02_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_04_02_7143 --|
+  PIA_04_03_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_04_03_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_04_03_1131 --|
+  PIA_04_04_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_04_04_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_04_04_3055 --|
+  }*0 .. 1 ;; |-- end PIA_04_C212 --|
+  PIA_05_C212 { Composite 
+  PIA_05_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_05_set --|
+  PIA_05_01_7140 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_05_01_7140 --|
+  PIA_05_02_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_05_02_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_05_02_7143 --|
+  PIA_05_03_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_05_03_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_05_03_1131 --|
+  PIA_05_04_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_05_04_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_05_04_3055 --|
+  }*0 .. 1 ;; |-- end PIA_05_C212 --|
+  PIA_06_C212 { Composite 
+  PIA_06_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_06_set --|
+  PIA_06_01_7140 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_06_01_7140 --|
+  PIA_06_02_7143 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_06_02_7143)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_06_02_7143 --|
+  PIA_06_03_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_06_03_1131)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_06_03_1131 --|
+  PIA_06_04_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_06_04_3055)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_06_04_3055 --|
+  }*0 .. 1 ;; |-- end PIA_06_C212 --|
+  [PIA_02_02_7143 == "VP"]
+	VAR->VP = PIA_02_01_7140
+
+  }*0 .. 1 ;; |-- end PIA --|
+  MEA_3 { Segment  "MEA"
+  MEA_3_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_3_set --|
+  MEA_3_01_6311 { ElementAN @1 .. 3  v6311 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_3_01_6311)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_3_01_6311 --|
+  MEA_3_02_C502 { Composite 
+  MEA_3_02_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_3_02_set --|
+  MEA_3_02_01_6313 { BegComponentAN @1 .. 3  v6313 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_3_02_01_6313)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_3_02_01_6313 --|
+  MEA_3_02_02_6321 { ComponentAN @1 .. 3  v6321 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_3_02_02_6321)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_3_02_02_6321 --|
+  MEA_3_02_03_6155 { ComponentAN @1 .. 17  v6155 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_3_02_03_6155)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_3_02_03_6155 --|
+  MEA_3_02_04_6154 { ComponentAN @1 .. 70  none 
+  }*0 .. 1 ;; |-- end MEA_3_02_04_6154 --|
+  }*0 .. 1 ;; |-- end MEA_3_02_C502 --|
+  MEA_3_03_C174 { Composite 
+  MEA_3_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end MEA_3_03_set --|
+  MEA_3_03_01_6411 { BegComponentAN @1 .. 3  none 
+  }*1 .. 1 ;; |-- end MEA_3_03_01_6411 --|
+  MEA_3_03_02_6314 { ComponentAN @1 .. 18  none 
+  }*0 .. 1 ;; |-- end MEA_3_03_02_6314 --|
+  MEA_3_03_03_6162 { ComponentN @1 .. 18 "N0RRRRRRRRRRRRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end MEA_3_03_03_6162 --|
+  MEA_3_03_04_6152 { ComponentN @1 .. 18 "N0RRRRRRRRRRRRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end MEA_3_03_04_6152 --|
+  MEA_3_03_05_6432 { ComponentN @1 .. 2 "N0RR:1" none 
+  }*0 .. 1 ;; |-- end MEA_3_03_05_6432 --|
+  }*0 .. 1 ;; |-- end MEA_3_03_C174 --|
+  MEA_3_04_7383 { ElementAN @1 .. 3  v7383 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &MEA_3_04_7383)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end MEA_3_04_7383 --|
+  }*0 .. 5 ;; |-- end MEA_3 --|
+  QTY_1_001_001 { Segment  "QTY"
+  QTY_1_set_001_001 { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end QTY_1_set_001_001 --|
+  QTY_1_01_C186_001_001 { Composite 
+  QTY_1_01_set_001_001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end QTY_1_01_set_001_001 --|
+  QTY_1_01_01_6063_001_001 { BegComponentAN @1 .. 3  v6063 
+  []
+
+[] ; assign after ID code verification
+PERFORM("OTVerifyID", &QTY_1_01_01_6063_001_001)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end QTY_1_01_01_6063_001_001 --|
+  QTY_1_01_02_6060_001_001 { ComponentN @1 .. 15 "N0RRRRRRRRRRRRRRR:1" none 
+  }*1 .. 1 ;; |-- end QTY_1_01_02_6060_001_001 --|
+  QTY_1_01_03_6411_001_001 { ComponentAN @1 .. 3  none 
+  }*0 .. 1 ;; |-- end QTY_1_01_03_6411_001_001 --|
+  }*1 .. 1 ;; |-- end QTY_1_01_C186_001_001 --|
+  [QTY_1_01_01_6063_001_001 == "12"]
+	VAR->ITEM_QTY_1 = STRTRIM(QTY_1_01_02_6060_001_001, "L", "0")
+
+  }*1 .. 1 ;; |-- end QTY_1_001_001 --|
+  ALI_2 { Segment  "ALI"
+  ALI_2_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+
+  }*1 .. 1 ;; |-- end ALI_2_set --|
+  ALI_2_01_3239 { ElementAN @1 .. 3  none 
+  }*1 .. 1 ;; |-- end ALI_2_01_3239 --|
+  ALI_2_02_9213 { ElementAN @1 .. 3  v9213 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &ALI_2_02_9213)
+
+  }*0 .. 1 ;; |-- end ALI_2_02_9213 --|
+  ALI_2_03_4183 { ElementAN @1 .. 3  v4183 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &ALI_2_03_4183)
+
+  }*0 .. 1 ;; |-- end ALI_2_03_4183 --|
+  ALI_2_04_4183 { ElementAN @1 .. 3  v4183 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &ALI_2_04_4183)
+
+  }*0 .. 1 ;; |-- end ALI_2_04_4183 --|
+  ALI_2_05_4183 { ElementAN @1 .. 3  v4183 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &ALI_2_05_4183)
+
+  }*0 .. 1 ;; |-- end ALI_2_05_4183 --|
+  ALI_2_06_4183 { ElementAN @1 .. 3  v4183 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &ALI_2_06_4183)
+
+  }*0 .. 1 ;; |-- end ALI_2_06_4183 --|
+  ALI_2_07_4183 { ElementAN @1 .. 3  v4183 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &ALI_2_07_4183)
+
+  }*0 .. 1 ;; |-- end ALI_2_07_4183 --|
+  [ ]
+	VAR->COO = ALI_2_01_3239
+
+  }*1 .. 5 ;; |-- end ALI_2 --|
+  RFF_3_GROUP_17 { 
+  RFF_3 { Segment  "RFF"
+  RFF_3_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end RFF_3_set --|
+  RFF_3_01_C506 { Composite 
+  RFF_3_01_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end RFF_3_01_set --|
+  RFF_3_01_01_1153 { BegComponentAN @1 .. 3  v1153 
+  [] ; assign after ID code verification
+  PERFORM("OTVerifyID", &RFF_3_01_01_1153)
+  ;;-SPCL_RULES
+	VAR->REF_CODE = RFF_3_01_01_1153
+
+  }*1 .. 1 ;; |-- end RFF_3_01_01_1153 --|
+  RFF_3_01_02_1154 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end RFF_3_01_02_1154 --|
+  RFF_3_01_03_1156 { ComponentAN @1 .. 6  none 
+  }*0 .. 1 ;; |-- end RFF_3_01_03_1156 --|
+  RFF_3_01_04_4000 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end RFF_3_01_04_4000 --|
+  }*1 .. 1 ;; |-- end RFF_3_01_C506 --|
+  [VAR->REF_CODE == "PK"]
+  	VAR->PK_LIST_NO = RFF_3_01_02_1154 ;;; packing list number
+
+[VAR->REF_CODE == "ON"]			;;; PO number & PO line item number
+  	VAR->PO_NO = STRSUBS(RFF_3_01_02_1154, 1, 10)
+	VAR->PO_ITEM_NO = RFF_3_01_03_1156
+
+  }*1 .. 1 ;; |-- end RFF_3 --|
+  }*0 .. 7 ;; |-- end RFF_3_GROUP_17 --|
+  [ ]
+	ARRAY->E2EDP07_BSTNK = VAR->PO_NO
+	ARRAY->E2EDP07_POSEX = VAR->PO_ITEM_NO
+	;;ARRAY->E2EDP07_ZEICH = VAR->XLX_SO_NO
+	ARRAY->OOS_COO = VAR->COO
+	ARRAY->ITEM_LOOP = "DATA"
+
+[]
+
+	ARRAY->E2EDP09_MATNR = VAR->VP
+	ARRAY->E2EDP09_KDMAT = VAR->BP
+	ARRAY->E2EDP09_LFIMG = VAR->ITEM_QTY_1
+	ARRAY->E2EDP09_VRKME = "EA"
+
+  }*0 .. 1 ;; |-- end LIN_GROUP_15 --|
+  LIN_GROUP_B_0001 { 
+  LIN_0001 { Segment  "LIN"
+  LIN_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end LIN_set_0001 --|
+  LIN_01_1082_0001 { ElementAN @1 .. 6  none 
+  }*0 .. 1 ;; |-- end LIN_01_1082_0001 --|
+  LIN_02_1229_0001 { ElementAN @1 .. 3  v1229 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_02_1229_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_02_1229_0001 --|
+  LIN_03_C212_0001 { Composite 
+  LIN_03_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end LIN_03_set_0001 --|
+  LIN_03_01_7140_0001 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end LIN_03_01_7140_0001 --|
+  LIN_03_02_7143_0001 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_03_02_7143_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_03_02_7143_0001 --|
+  LIN_03_03_1131_0001 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_03_03_1131_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_03_03_1131_0001 --|
+  LIN_03_04_3055_0001 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_03_04_3055_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_03_04_3055_0001 --|
+  }*0 .. 1 ;; |-- end LIN_03_C212_0001 --|
+  LIN_04_C829_0001 { Composite 
+  LIN_04_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end LIN_04_set_0001 --|
+  LIN_04_01_5495_0001 { BegComponentAN @1 .. 3  v5495 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_04_01_5495_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_04_01_5495_0001 --|
+  LIN_04_02_1082_0001 { ComponentAN @1 .. 6  none 
+  }*0 .. 1 ;; |-- end LIN_04_02_1082_0001 --|
+  }*0 .. 1 ;; |-- end LIN_04_C829_0001 --|
+  LIN_05_1222_0001 { ElementN @1 .. 2 "N0RR:1" none 
+  }*0 .. 1 ;; |-- end LIN_05_1222_0001 --|
+  LIN_06_7083_0001 { ElementAN @1 .. 3  v7083 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &LIN_06_7083_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end LIN_06_7083_0001 --|
+  []
+  	VAR->BIN_CODE = " "
+
+  }*1 .. 1 ;; |-- end LIN_0001 --|
+  PIA_0001 { Segment  "PIA"
+  PIA_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_set_0001 --|
+  PIA_01_4347_0001 { ElementAN @1 .. 3  v4347 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_01_4347_0001)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_01_4347_0001 --|
+  PIA_02_C212_0001 { Composite 
+  PIA_02_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_02_set_0001 --|
+  PIA_02_01_7140_0001 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_02_01_7140_0001 --|
+  PIA_02_02_7143_0001 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+;PERFORM("OTVerifyID", &PIA_02_02_7143_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_02_02_7143_0001 --|
+  PIA_02_03_1131_0001 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_02_03_1131_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_02_03_1131_0001 --|
+  PIA_02_04_3055_0001 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_02_04_3055_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_02_04_3055_0001 --|
+  }*1 .. 1 ;; |-- end PIA_02_C212_0001 --|
+  PIA_03_C212_0001 { Composite 
+  PIA_03_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_03_set_0001 --|
+  PIA_03_01_7140_0001 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_03_01_7140_0001 --|
+  PIA_03_02_7143_0001 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_03_02_7143_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_03_02_7143_0001 --|
+  PIA_03_03_1131_0001 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_03_03_1131_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_03_03_1131_0001 --|
+  PIA_03_04_3055_0001 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_03_04_3055_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_03_04_3055_0001 --|
+  }*0 .. 1 ;; |-- end PIA_03_C212_0001 --|
+  PIA_04_C212_0001 { Composite 
+  PIA_04_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_04_set_0001 --|
+  PIA_04_01_7140_0001 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_04_01_7140_0001 --|
+  PIA_04_02_7143_0001 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_04_02_7143_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_04_02_7143_0001 --|
+  PIA_04_03_1131_0001 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_04_03_1131_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_04_03_1131_0001 --|
+  PIA_04_04_3055_0001 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_04_04_3055_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_04_04_3055_0001 --|
+  }*0 .. 1 ;; |-- end PIA_04_C212_0001 --|
+  PIA_05_C212_0001 { Composite 
+  PIA_05_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_05_set_0001 --|
+  PIA_05_01_7140_0001 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_05_01_7140_0001 --|
+  PIA_05_02_7143_0001 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_05_02_7143_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_05_02_7143_0001 --|
+  PIA_05_03_1131_0001 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_05_03_1131_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_05_03_1131_0001 --|
+  PIA_05_04_3055_0001 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_05_04_3055_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_05_04_3055_0001 --|
+  }*0 .. 1 ;; |-- end PIA_05_C212_0001 --|
+  PIA_06_C212_0001 { Composite 
+  PIA_06_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end PIA_06_set_0001 --|
+  PIA_06_01_7140_0001 { BegComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end PIA_06_01_7140_0001 --|
+  PIA_06_02_7143_0001 { ComponentAN @1 .. 3  v7143 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_06_02_7143_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_06_02_7143_0001 --|
+  PIA_06_03_1131_0001 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_06_03_1131_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_06_03_1131_0001 --|
+  PIA_06_04_3055_0001 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &PIA_06_04_3055_0001)
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end PIA_06_04_3055_0001 --|
+  }*0 .. 1 ;; |-- end PIA_06_C212_0001 --|
+  }*0 .. 1 ;; |-- end PIA_0001 --|
+  IMD { Segment  "IMD"
+  IMD_set { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end IMD_set --|
+  IMD_01_7077 { ElementAN @1 .. 3  v7077 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &IMD_01_7077)
+;;+SPCL_RULES
+
+[] ; assignment after ID code validation
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end IMD_01_7077 --|
+  IMD_02_7081 { ElementAN @1 .. 3  v7081 
+  [] ; assign after ID code verification
+;PERFORM("OTVerifyID", &IMD_02_7081)
+;;+SPCL_RULES
+
+[] ; assignment after ID code validation
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end IMD_02_7081 --|
+  IMD_03_C273 { Composite 
+  IMD_03_set { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end IMD_03_set --|
+  IMD_03_01_7009 { BegComponentAN @1 .. 17  none 
+  }*0 .. 1 ;; |-- end IMD_03_01_7009 --|
+  IMD_03_02_1131 { ComponentAN @1 .. 3  v1131 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &IMD_03_02_1131)
+;;+SPCL_RULES
+
+[] ; assignment after ID code validation
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end IMD_03_02_1131 --|
+  IMD_03_03_3055 { ComponentAN @1 .. 3  v3055 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &IMD_03_03_3055)
+;;+SPCL_RULES
+
+[] ; assignment after ID code validation
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end IMD_03_03_3055 --|
+  IMD_03_04_7008 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end IMD_03_04_7008 --|
+  IMD_03_05_7008 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end IMD_03_05_7008 --|
+  IMD_03_06_3453 { ComponentAN @1 .. 3  none 
+  }*0 .. 1 ;; |-- end IMD_03_06_3453 --|
+  }*0 .. 1 ;; |-- end IMD_03_C273 --|
+  IMD_04_7383 { ElementAN @1 .. 3  v7383 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &IMD_04_7383)
+;;+SPCL_RULES
+
+[] ; assignment after ID code validation
+;;-SPCL_RULES
+
+  }*0 .. 1 ;; |-- end IMD_04_7383 --|
+  [IMD_03_01_7009 == "DC"]
+	VAR->DATE_CODE = IMD_03_05_7008
+
+;[IMD_03_01_7009 == "LI"] ;; Luminous intensity group 1
+;	VAR->LI = STRTRIM(IMD_03_05_7008, "B", "")
+
+;[IMD_03_01_7009 == "CTR"] ;; Color Tolerance Range 1
+;	VAR->CTR = STRTRIM(IMD_03_05_7008, "B", "")
+
+;[IMD_03_01_7009 == "UF"] ;; Forward voltage 1
+;	VAR->UF = STRTRIM(IMD_03_05_7008, "B", "")
+
+;[IMD_03_01_7009 == "CV"] ;; Characteristic (Bin Code)
+	;VAR->BIN_CODE = STRTRIM(IMD_03_05_7008, "B", "")
+
+[]
+
+IF [IMD_01_7077 == "C" && IMD_03_05_7008 != ""]
+ VAR->BIN_CODE =  IMD_03_05_7008
+
+ELSE [IMD_03_01_7009 == "CV" ]
+ VAR->BIN_CODE =  IMD_03_05_7008
+
+  }*0 .. 99 ;; |-- end IMD --|
+  QTY_1_001_001_0001 { Segment  "QTY"
+  QTY_1_set_001_001_0001 { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end QTY_1_set_001_001_0001 --|
+  QTY_1_01_C186_001_001_0001 { Composite 
+  QTY_1_01_set_001_001_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end QTY_1_01_set_001_001_0001 --|
+  QTY_1_01_01_6063_001_001_0001 { BegComponentAN @1 .. 3  v6063 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &QTY_1_01_01_6063_001_001_0001)
+;;-SPCL_RULES
+
+  }*1 .. 1 ;; |-- end QTY_1_01_01_6063_001_001_0001 --|
+  QTY_1_01_02_6060_001_001_0001 { ComponentN @1 .. 15 "N0RRRRRRRRRRRRRRR:1" none 
+  }*1 .. 1 ;; |-- end QTY_1_01_02_6060_001_001_0001 --|
+  QTY_1_01_03_6411_001_001_0001 { ComponentAN @1 .. 3  none 
+  }*0 .. 1 ;; |-- end QTY_1_01_03_6411_001_001_0001 --|
+  }*1 .. 1 ;; |-- end QTY_1_01_C186_001_001_0001 --|
+  [QTY_1_01_01_6063_001_001_0001 == "11"]
+	VAR->ITEM_QTY = STRTRIM(QTY_1_01_02_6060_001_001_0001, "L", "0")
+
+  }*1 .. 1 ;; |-- end QTY_1_001_001_0001 --|
+  GIN_GROUP_H_0001 { 
+  GIN_0001 { Segment  "GIN"
+  GIN_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTElemCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_set_0001 --|
+  GIN_01_7405_0001 { ElementAN @1 .. 3  v7405 
+  [] ; assign after ID code verification
+PERFORM("OTVerifyID", &GIN_01_7405_0001)
+
+  }*1 .. 1 ;; |-- end GIN_01_7405_0001 --|
+  GIN_02_C208_0001 { Composite 
+  GIN_02_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_02_set_0001 --|
+  GIN_02_01_7402_0001 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_02_01_7402_0001 --|
+  GIN_02_02_7402_0001 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_02_02_7402_0001 --|
+  }*1 .. 1 ;; |-- end GIN_02_C208_0001 --|
+  GIN_03_C208_0001 { Composite 
+  GIN_03_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_03_set_0001 --|
+  GIN_03_01_7402_0001 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_03_01_7402_0001 --|
+  GIN_03_02_7402_0001 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_03_02_7402_0001 --|
+  }*0 .. 1 ;; |-- end GIN_03_C208_0001 --|
+  GIN_04_C208_0001 { Composite 
+  GIN_04_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_04_set_0001 --|
+  GIN_04_01_7402_0001 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_04_01_7402_0001 --|
+  GIN_04_02_7402_0001 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_04_02_7402_0001 --|
+  }*0 .. 1 ;; |-- end GIN_04_C208_0001 --|
+  GIN_05_C208_0001 { Composite 
+  GIN_05_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_05_set_0001 --|
+  GIN_05_01_7402_0001 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_05_01_7402_0001 --|
+  GIN_05_02_7402_0001 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_05_02_7402_0001 --|
+  }*0 .. 1 ;; |-- end GIN_05_C208_0001 --|
+  GIN_06_C208_0001 { Composite 
+  GIN_06_set_0001 { 
+  []
+SET_ECOUNT(VAR->OTCompCnt, 0)
+
+  }*1 .. 1 ;; |-- end GIN_06_set_0001 --|
+  GIN_06_01_7402_0001 { BegComponentAN @1 .. 35  none 
+  }*1 .. 1 ;; |-- end GIN_06_01_7402_0001 --|
+  GIN_06_02_7402_0001 { ComponentAN @1 .. 35  none 
+  }*0 .. 1 ;; |-- end GIN_06_02_7402_0001 --|
+  }*0 .. 1 ;; |-- end GIN_06_C208_0001 --|
+  }*1 .. 1 ;; |-- end GIN_0001 --|
+  }*0 .. 99 ;; |-- end GIN_GROUP_H_0001 --|
+  []
+  	ARRAY->ZE2EDP09_ZQTY = VAR->ITEM_QTY
+  	ARRAY->ZE2EDP09_ZDATECODE = VAR->DATE_CODE
+  	ARRAY->ZE2EDP09_ZOUTBOXID = VAR->BIN_CODE
+	ARRAY->ZBOXID_LOOP = "DATA"
+
+  }*1 .. 9999 ;; |-- end LIN_GROUP_B_0001 --|
+  [ ]
+	ARRAY->ZBOXID_LOOP = "STOP"
+
+  }*0 .. 9999 ;; |-- end CPS_GROUP_11 --|
+  UNT_TEST { AnyChar @2 .. 3  none 
+  []
+PERFORM("OTUNTTest", &UNT_TEST)
+
+  }*0 .. 1 ;; |-- end UNT_TEST --|
+[]
+PERFORM("OTSrcEnd")
+
+[ ]
+	ARRAY->E2EDKA1_PARVW = "AG"
+	ARRAY->E2EDKA1_PARTN = "OOS-ASIA"
+	ARRAY->E2EDKA1_LOOP = "DATA"
+	ARRAY->E2EDKA1_LOOP = "STOP"
+
+	ARRAY->E2EDKA2_PARVW = "AG"
+	ARRAY->E2EDKA2_PARTN = "OOS-ASIA"
+	ARRAY->E2EDKA2_NAME1 = " "
+	ARRAY->E2EDKA2_STRAS = " "
+	ARRAY->E2EDKA2_SRTRS2 = " "
+	ARRAY->E2EDKA2_ORT01 = " "
+	ARRAY->E2EDKA2_LAND1 = " "
+	ARRAY->E2EDKA2_LOOP = "DATA"
+	ARRAY->E2EDKA2_PARVW = "SH"
+	ARRAY->E2EDKA2_PARTN = "OOS-ASIA"
+	ARRAY->E2EDKA2_NAME1 = "SHIP_TO_NAME"
+	ARRAY->E2EDKA2_STRAS = "SHIP_TO_ADD"
+	ARRAY->E2EDKA2_SRTRS2 = "SHIP_TO_ADD1"
+	ARRAY->E2EDKA2_ORT01 = "SHIP_TO_CITY"
+	ARRAY->E2EDKA2_LAND1 = "SHIP_TO_COUNTRY"
+	ARRAY->E2EDKA2_LOOP = "DATA"
+	ARRAY->E2EDKA2_LOOP = "STOP"
+
+	ARRAY->E2EDK03_IDDAT = "001"
+	ARRAY->E2EDK03_DATUM = VAR->ASN_DOC_DATE
+	
+	ARRAY->E2EDK07_ACTION = "000"
+	ARRAY->E2EDK07_VBELN = VAR->ASN_NO
+
+
+	ARRAY->E2EDK08_ACTION = "001"
+	ARRAY->E2EDK08_VBELN = VAR->PK_LIST_NO
+
+
+	ARRAY->E2EDK06_IDDAT = "001"
+	ARRAY->E2EDK06_DATUM = VAR->ASN_SHIP_DATE
+	ARRAY->E2EDK06_UHRZE = VAR->ASN_SHIP_TIME_SAP
+
+[ ]
+
+
+	ARRAY->E2EDKA2_LOOP = "STOP"
+	ARRAY->ITEM_LOOP = "STOP"
+
+[ ]
+	VAR->TargetMdl = "EMasia/DESADVi/rDESadvt97aasiaoos.att"
+	ATTACH VAR->TargetMdl
+
+[]  ;   check target error status
+	VAR->OTAttachRtnStatus  = ERRCODE()
+	VAR->TargetMdlError = "** undefined **"
+
+[VAR->OTAttachRtnStatus != 0 && PRESENT (&VAR->OTConditionError)]
+	VAR->TargetMdlError = VAR->OTConditionError
+
+[VAR->OTAttachRtnStatus != 0 && PRESENT (&ARRAY->OTMsgErrText)]
+	RESET_VAL ARRAY->OTMsgErrText
+	VAR->TargetMdlError = ARRAY->OTMsgErrText
+
+[ VAR->OTAttachRtnStatus != 0 ]
+;   target model processing failure has occurred
+;   notify user:
+	SEND_SMSG(3,"Encountered error processing target model: ", VAR->TargetMdl, STRCAT("Error Code = ",VAR->OTAttachRtnStatus))
+	VAR->OTAttachRtnStatusSaved = VAR->OTAttachRtnStatus
+	VAR->OTErrorCntSaved = VAR->OTErrorCnt
+	VAR->OTErrorCnt = 0
+; build email body...
+	ARRAY->ELEM_VALUE = " "
+	ARRAY->ELEM_VALUE = "EDI ASIA DESADVi information:"
+	ARRAY->ELEM_VALUE = " "
+	ARRAY->ELEM_VALUE = STRCATM(3, "System Date/Time: = ", SYSTEM_DATE(), SYSTEM_TIME())
+	ARRAY->ELEM_VALUE = STRCAT("Session Number: = ", VAR->SESSION_NO)
+	ARRAY->ELEM_VALUE = STRCAT("Target Model: = ", VAR->TargetMdl)
+	ARRAY->ELEM_VALUE = STRCAT("Error: = ", VAR->OTAttachRtnStatus)
+	VAR->NoOfBodyLines1 = 8
+;
+	VAR->EmailBody = STRCAT("ebodymsg.", VAR->SESSION_NO)
+	VAR->EmailSubject = STRCAT(DECIMAL_CHAR("\034EDI ASIA DESADVi translation error..."), DECIMAL_CHAR("\034"))
+	VAR->EmailMessage = STRCATM(6, "mailx -s ", VAR->EmailSubject, " ", VAR->EmailAddressPROD, " < ", VAR->EmailBody)
+; build e-mail message body...
+	ATTACH "ebody.att"
+; send email message to Tech Support Group...
+	EXEC VAR->EmailMessage
+; remove the ebody file...
+	VAR->RmFile = STRCAT("rm ", VAR->EmailBody)
+	EXEC VAR->RmFile
+; create bypass file...
+	VAR->OTTargetSuccessful = "No"
+; restore original error status code...
+	VAR->OTAttachRtnStatus = VAR->OTAttachRtnStatusSaved
+	VAR->OTErrorCnt = VAR->OTErrorCntSaved
+; return to prior environment with error value
+	EXIT VAR->OTAttachRtnStatus
+
+[]
+	VAR->outputFileName = STRCATM(3,$EFTMsgInProdName, ".", VAR->OTSessionNo)
+
+[]
+	VAR->OTRtnStatus = FILE_STAT(VAR->outputFileName, &VAR->outFileType,                                                                        &VAR->outFileSize, &VAR->outFileLstMdDt, &VAR->outFilePerm)
+
+[]
+	VAR->error = COPY (VAR->outputFileName, STRCAT(VAR->OTArchiveDir,VAR->OTSessionNo))
+
+[]
+	VAR->archiveFile = STRCATM(15, VAR->OTArchiveDir,
+					"s",
+					VAR->OTICSenderID,
+					".",
+					VAR->OTICReceiverID,
+					".",
+					VAR->OTMsgSetID,
+					".",	
+					VAR->OTICCtlNo,
+					".",
+					VAR->OTFGCtlNo,
+					".",
+					VAR->OTMsgCtlNo,
+					".",
+					VAR->OTSessionNo)
+
+	VAR->tempArchiveFile = STRCATM(16, VAR->OTArchiveDir,
+					$EFTMsgInProdName,
+					".",
+					VAR->OTICSenderID,
+					".",
+					VAR->OTICReceiverID,
+					".",
+					VAR->OTMsgSetID,
+					".",	
+					VAR->OTICCtlNo,
+					".",
+					VAR->OTFGCtlNo,
+					".",
+					VAR->OTMsgCtlNo,
+					".",
+					VAR->OTSessionNo)
+
+	VAR->OTExecString = STRCATM(4, VAR->OTCopy, VAR->outputFileName, " ", VAR->archiveFile)
+	VAR->OTExecTempString = STRCATM(4, "mv ", VAR->outputFileName, " ", VAR->tempArchiveFile)
+
+	
+	EXEC VAR->OTExecString
+	EXEC VAR->OTExecTempString
+
+[]
+	VAR->ES_Sender_ID = "AI_INBOUND"
+	VAR->ES_Receiver_ID = "SAP_INBOUND_ASIA40"
+	VAR->ES_APRF = VAR->OTMsgSetID	
+	VAR->ES_SNRF = VAR->OTSessionNo
+
+[]
+	VAR->ES_Routing = STRCATM(12, ":ESR:,", "b", ",",VAR->archiveFile, ",", VAR->ES_Sender_ID, ",",VAR->ES_Receiver_ID, ",", VAR->ES_APRF, ",",VAR->ES_SNRF)
+
+    SEND_SMSG(1,VAR->ES_Routing)
+
+:ERROR
+[]
+PERFORM("OTLGE")
+
+}*1 .. 1 ;; |-- end Msg_DESADV_GROUP_1 --|
