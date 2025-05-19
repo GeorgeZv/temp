@@ -1,0 +1,416 @@
+[ VAR->lineItemCntr != VAR->PO1_limit ];  begin 40 item connect out ;;;;;;;;;;;;;;;;;;;;;;;;
+	CONTINUE
+
+[]
+	ARRAY->OrigDocId_fld          = VAR->BEG_03_324
+	ARRAY->DocInstanceId_fld      = STRCATM(5, VAR->BEG_03_324,"T",SYSTEM_DATE(),SYSTEM_TIME(),".000Z"  )
+	ARRAY->ConversationId_fld     = VAR->BEG_03_324
+	ARRAY->PubSystemId_fld        = "GXS"
+	ARRAY->BusinessEntity_fld     = "EM"
+	ARRAY->Region_fld             = "AMER"
+	ARRAY->Verb_fld               = "PROCESS"
+	ARRAY->Noun_fld               = "PO"
+	ARRAY->Direction_fld          = "INBOUND"
+	ARRAY->Method_fld             = "Request"
+	ARRAY->ToPartyId_fld          = "EvolveEcc"
+	ARRAY->FromPartyId_fld        = "B2B"
+	ARRAY->ResponderProcessId_fld = "Standard XML"
+	ARRAY->IsFullyPopulated_fld   = "Yes"
+	ARRAY->UdmMajorRevId_fld      = "2"
+	ARRAY->UdmMinorRevId_fld      = "0"
+	ARRAY->sourceFileName_fld     = VAR->OTSessionNo
+	ARRAY->Mode_fld               = "GXS"
+	ARRAY->DocInstanceCreateDt_fld = STRCATM(5, VAR->BEG_03_324,"T",SYSTEM_DATE(),SYSTEM_TIME(),".000Z"  )
+
+[]  ;;;  *********  Attach Target Model   *********
+
+	ATTACH "EMamer/850i/r850tEvolvePO_XML.att"
+
+[]
+
+	VAR->OTTargetSuccessful = "Yes"
+	VAR->lineItemCntr = 0
+
+[]
+
+	VAR->outputFilename = STRREPL(GET_EVAR("OUTPUTFILENAME"), "+", "")
+	VAR->cp_File_Name = STRCATM(4,"cp  ", VAR->outputFilename, " ", STRCAT(VAR->OTSessionNo, ".xml"))
+	EXEC 	VAR->cp_File_Name
+
+[]
+
+	VAR->OTCurMsgStd   = "XML"
+	VAR->OTCurRelease  = "\."
+	VAR->OTCallParserFileSuffix = "xml" ; for "<SessionNo>.xml" 
+	VAR->parserAttachment = "OTCallParser.att"
+
+	ATTACH  VAR->parserAttachment
+
+[] 
+
+	VAR->ParserErrorValue = ERRCODE()
+
+[ VAR->ParserErrorValue != 0 ]
+
+	VAR->error = COPY(STRCAT(VAR->OTSessionNo, ".err"), STRCATM(7, "archive/", "parserError.", VAR->OTFGSenderCd, ".", VAR->OTFGReceiverCd, ".", VAR->OTSessionNo))
+
+[ VAR->ParserErrorValue != 0 ]
+
+;   target model processing failure has occurred
+
+;   notify user:
+
+	SEND_SMSG(3,"Encountered error processing target model: ", VAR->parserAttachment, STRCAT("Error Code = ",VAR->ParserErrorValue))
+
+	VAR->OTAttachRtnStatusSaved = VAR->ParserErrorValue
+	VAR->OTTargetSuccessful = "No"
+
+	EXIT 888
+
+[ ]
+
+        FILE_STAT(STRCAT(VAR->OTSessionNo, ".xml"),
+                    &VAR->OTType,    &VAR->OTSize,
+                    &VAR->OTLstMdDt, &VAR->OTPerm)
+
+[]
+	VAR->fileNameCntr  = NUMTRIM(VAR->fileNameCntr + 1, 0)
+	VAR->BEG_03_324_fn = STRCATM(3,VAR->BEG_03_324, "_", VAR->fileNameCntr)
+
+[ ]
+
+VAR->UDM_FileName = STRCATM(17,"appl/Av850in",VAR->dot,
+                        VAR->OTFGSenderCd,VAR->dot,
+                        VAR->OTFGReceiverCd, VAR->dot,
+                        VAR->OTMsgSetID, VAR->dot,
+                        VAR->OTICCtlNo,VAR->dot,
+                        VAR->OTFGCtlNo,VAR->dot,
+                        VAR->OTMsgCtlNo, VAR->dot,
+                        VAR->BEG_03_324_fn,VAR->dot,
+                        VAR->OTSessionNo)
+
+[]
+	VAR->xmlOutputFileName = STRCAT(VAR->OTSessionNo, ".xml")
+	VAR->copy_File_Name = STRCATM(4,"cp  ", VAR->xmlOutputFileName, " ", VAR->UDM_FileName)
+	EXEC 	VAR->copy_File_Name
+
+[ ]
+
+VAR->archive_FileName = STRCATM(17,"archive/Av850in",VAR->dot,
+                        VAR->OTFGSenderCd,VAR->dot,
+                        VAR->OTFGReceiverCd, VAR->dot,
+                        VAR->OTMsgSetID, VAR->dot,
+                        VAR->OTICCtlNo,VAR->dot,
+                        VAR->OTFGCtlNo,VAR->dot,
+                        VAR->OTMsgCtlNo, VAR->dot,
+                        VAR->BEG_03_324_fn,VAR->dot,
+                        VAR->OTSessionNo)
+
+[]
+	VAR->cp_archive_File_Name = STRCATM(4,"cp  ", VAR->xmlOutputFileName, " ", VAR->archive_FileName)
+	EXEC 	VAR->cp_archive_File_Name
+
+[]
+	VAR->OTCurFileName = STRREPL(VAR->UDM_FileName, "appl/", "")
+	VAR->copy_File_Name = STRCATM(4,"cp ", VAR->xmlOutputFileName, " ", VAR->OTCurFileName)
+
+[]
+
+	VAR->error = REMOVE(VAR->outputFilename )
+
+[]
+	VAR->error = REMOVE(VAR->xmlOutputFileName)
+
+[VAR->Ref_flag == "N"] ;;QC#49007
+	VAR->ES_Filename 	= STRCAT("appl/",VAR->OTCurFileName)
+	VAR->ES_Sender_ID	= VAR->Cust_Vendor_Code
+	VAR->ES_APRF 		= "udmPoV1_1" 
+	VAR->ES_Receiver_ID	= "EvolveEcc"
+	VAR->ES_SNRF = VAR->BEG_03_324_fn
+
+    VAR->ES_Routing = STRCATM(12, ":ESR:,", "b", ",",
+                          VAR->ES_Filename, ",", VAR->ES_Sender_ID, ",",
+                          VAR->ES_Receiver_ID, ",", VAR->ES_APRF, ",",
+                          VAR->ES_SNRF)
+
+        SEND_SMSG(1,VAR->ES_Routing)
+
+  }*1 .. 100000 ;; |-- end PO1_GROUP_12 --|
+  CTT_GROUP_32 { 
+  CTT { Segment  "CTT"
+  CTT_set { 
+  []
+
+;SET_ECOUNT(VAR->OTElemCnt, 0)
+
+  }*1 .. 1 ;; |-- end CTT_set --|
+  CTT_01_354 { ElementN @1 .. 6 "NFFFFF9" none 
+  }*1 .. 1 ;; |-- end CTT_01_354 --|
+  CTT_02_347 { ElementN @1 .. 10 "NRRRRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end CTT_02_347 --|
+  CTT_03_81 { ElementN @1 .. 10 "NRRRRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end CTT_03_81 --|
+  CTT_04_355 { ElementID @2 .. 2  v0355 
+  [] ; assign after ID code verification
+
+PERFORM("OTVerifyID", &CTT_04_355)
+
+  }*0 .. 1 ;; |-- end CTT_04_355 --|
+  CTT_05_183 { ElementN @1 .. 8 "NRRRRRRRR:1" none 
+  }*0 .. 1 ;; |-- end CTT_05_183 --|
+  CTT_06_355 { ElementID @2 .. 2  v0355 
+  [] ; assign after ID code verification
+
+PERFORM("OTVerifyID", &CTT_06_355)
+
+  }*0 .. 1 ;; |-- end CTT_06_355 --|
+  CTT_07_352 { ElementAN @1 .. 80  none 
+  }*0 .. 1 ;; |-- end CTT_07_352 --|
+  []
+
+PERFORM("OTConditional2", "P", &CTT_03_81, &CTT_04_355)
+
+PERFORM("OTConditional2", "P", &CTT_05_183, &CTT_06_355)
+
+[]
+
+VAR->CTT_01_354 = STRTRIM(DEFAULT_NULL(&CTT_01_354),VAR->TRIM_TYPE,VAR->SPACE)
+
+  }*1 .. 1 ;; |-- end CTT --|
+  AMT_2 { Segment  "AMT"
+  AMT_2_set { 
+  []
+
+;SET_ECOUNT(VAR->OTElemCnt, 0)
+
+  }*1 .. 1 ;; |-- end AMT_2_set --|
+  AMT_2_01_522 { ElementID @1 .. 3  v0522 
+  [] ; assign after ID code verification
+
+PERFORM("OTVerifyID", &AMT_2_01_522)
+
+  }*1 .. 1 ;; |-- end AMT_2_01_522 --|
+  AMT_2_02_782 { ElementN @1 .. 18 "NRRRRRRRRRRRRRRRRRR:1" none 
+  }*1 .. 1 ;; |-- end AMT_2_02_782 --|
+  AMT_2_03_478 { ElementID @1 .. 1  v0478 
+  [] ; assign after ID code verification
+
+PERFORM("OTVerifyID", &AMT_2_03_478)
+
+  }*0 .. 1 ;; |-- end AMT_2_03_478 --|
+  []
+
+	CONTINUE
+
+[]
+
+  VAR->AMT_2_01_522  = STRTRIM(DEFAULT_NULL(&AMT_2_01_522),VAR->TRIM_TYPE,VAR->SPACE) 
+
+  VAR->AMT_2_02_782 = STRTRIM(DEFAULT_NULL(&AMT_2_02_782),VAR->TRIM_TYPE,VAR->SPACE)
+
+[]
+
+	VAR->XrefStatus = 0 
+
+	VAR->EVL_Return_Value = "Not_Found"
+
+	VAR->EVL_Look_Up_Key  = VAR->AMT_2_01_522
+
+	VAR->EVL_Table_Name   = "EVL_AMT_01"
+
+[ VAR->EVL_Look_Up_Key != VAR->NULL ]
+
+	SET_EVAR("XREF_KEY", "STD")
+
+	VAR->XrefStatus = XREF(VAR->EVL_Table_Name, VAR->EVL_Look_Up_Key, &VAR->EVL_Return_Value, "N")
+
+[ VAR->EVL_Look_Up_Key != VAR->NULL ]
+
+
+
+ARRAY->OPERAMTElement_00008_LoopCtrl = VAR->Data
+
+
+
+ARRAY->POORDERLIN_OPERAMT_qual  = VAR->EVL_Return_Value
+
+ARRAY->POORDERLIN_OPERAMT_VALUE = VAR->AMT_2_02_782
+
+  }*0 .. 1 ;; |-- end AMT_2 --|
+  }*0 .. 1 ;; |-- end CTT_GROUP_32 --|
+  SE_TEST { AnyChar @2 .. 3  none 
+  []
+
+
+
+PERFORM("OTSETest", &SE_TEST)
+
+  }*0 .. 1 ;; |-- end SE_TEST --|
+  Final_Processing_Group_Customer { 
+  Process_ATTACH_Target_UDM { 
+  [ VAR->lineItemCntr == 0 ]
+	CONTINUE
+
+[]
+
+	ARRAY->OrigDocId_fld          = VAR->BEG_03_324
+	ARRAY->DocInstanceId_fld      = STRCATM(5, VAR->BEG_03_324,"T",SYSTEM_DATE(),SYSTEM_TIME(),".000Z"  )
+	ARRAY->ConversationId_fld     = VAR->BEG_03_324
+	ARRAY->PubSystemId_fld        = "GXS"
+	ARRAY->BusinessEntity_fld     = "EM"
+	ARRAY->Region_fld             = "AMER"
+	ARRAY->Verb_fld               = "PROCESS"
+	ARRAY->Noun_fld               = "PO"
+	ARRAY->Direction_fld          = "INBOUND"
+	ARRAY->Method_fld             = "Request"
+	ARRAY->ToPartyId_fld          = "EvolveEcc"
+	ARRAY->FromPartyId_fld        = "B2B"
+	ARRAY->ResponderProcessId_fld = "Standard XML"
+	ARRAY->IsFullyPopulated_fld   = "Yes"
+	ARRAY->UdmMajorRevId_fld      = "2"
+	ARRAY->UdmMinorRevId_fld      = "0"
+	ARRAY->sourceFileName_fld     = VAR->OTSessionNo
+	ARRAY->Mode_fld               = "GXS"
+	ARRAY->DocInstanceCreateDt_fld = STRCATM(5, VAR->BEG_03_324,"T",SYSTEM_DATE(),SYSTEM_TIME(),".000Z"  )
+
+[]  ;;;  *********  Attach Target Model   *********
+
+	ATTACH "EMamer/850i/r850tEvolvePO_XML.att"
+
+[]
+
+
+
+VAR->OTTargetSuccessful = "Yes"
+
+  }*0 .. 1 ;; |-- end Process_ATTACH_Target_UDM --|
+  Post_Processor { 
+  [ VAR->lineItemCntr == 0 ]
+	CONTINUE
+
+[]
+
+	VAR->outputFilename = STRREPL(GET_EVAR("OUTPUTFILENAME"), "+", "")
+	VAR->cp_File_Name = STRCATM(4,"cp  ", VAR->outputFilename, " ", STRCAT(VAR->OTSessionNo, ".xml"))
+	EXEC 	VAR->cp_File_Name
+
+[]
+
+	VAR->OTCurMsgStd   = "XML"
+	VAR->OTCurRelease  = "\."
+	VAR->OTCallParserFileSuffix = "xml" ; for "<SessionNo>.xml" 
+	VAR->parserAttachment = "OTCallParser.att"
+	ATTACH  VAR->parserAttachment
+
+[] 
+
+	VAR->ParserErrorValue = ERRCODE()
+
+[ VAR->ParserErrorValue != 0 ]
+
+	VAR->error = COPY(STRCAT(VAR->OTSessionNo, ".err"), STRCATM(7, "archive/", "parserError.", VAR->OTFGSenderCd, ".", VAR->OTFGReceiverCd, ".", VAR->OTSessionNo))
+
+[ VAR->ParserErrorValue != 0 ]
+
+;   target model processing failure has occurred
+
+;   notify user:
+
+	SEND_SMSG(3,"Encountered error processing target model: ", VAR->parserAttachment, STRCAT("Error Code = ",VAR->ParserErrorValue))
+
+	VAR->OTAttachRtnStatusSaved = VAR->ParserErrorValue
+	VAR->OTTargetSuccessful = "No"
+	EXIT 888
+
+[ ]
+
+        FILE_STAT(STRCAT(VAR->OTSessionNo, ".xml"),
+                    &VAR->OTType,    &VAR->OTSize,
+                    &VAR->OTLstMdDt, &VAR->OTPerm)
+
+[]
+	VAR->fileNameCntr  = NUMTRIM(VAR->fileNameCntr + 1, 0)
+	VAR->BEG_03_324_fn = STRCATM(3,VAR->BEG_03_324, "_", VAR->fileNameCntr)
+
+[ ]
+
+VAR->UDM_FileName = STRCATM(17,"Av850in",VAR->dot,
+                        VAR->OTFGSenderCd,VAR->dot,
+                        VAR->OTFGReceiverCd, VAR->dot,
+                        VAR->OTMsgSetID, VAR->dot,
+                        VAR->OTICCtlNo,VAR->dot,
+                        VAR->OTFGCtlNo,VAR->dot,
+                        VAR->OTMsgCtlNo, VAR->dot,
+                        VAR->BEG_03_324_fn, VAR->dot,
+                        VAR->OTSessionNo)
+
+[]
+	VAR->xmloutputFileName = STRCAT(VAR->OTSessionNo, ".xml")
+	VAR->copy_File_Name = STRCATM(4,"cp  ", VAR->xmloutputFileName, " ", VAR->UDM_FileName)
+	EXEC 	VAR->copy_File_Name
+
+VAR->archive_FileName = STRCATM(17,"Av850in",VAR->dot,
+                        VAR->OTFGSenderCd,VAR->dot,
+                        VAR->OTFGReceiverCd, VAR->dot,
+                        VAR->OTMsgSetID, VAR->dot,
+                        VAR->OTICCtlNo,VAR->dot,
+                        VAR->OTFGCtlNo,VAR->dot,
+                        VAR->OTMsgCtlNo, VAR->dot,
+                        VAR->BEG_03_324_fn, VAR->dot,
+                        VAR->OTSessionNo)
+
+[]
+	VAR->copy_archive_File_Name = STRCATM(4,"cp  ", VAR->xmloutputFileName, " ", VAR->archive_FileName)
+	EXEC 	VAR->copy_archive_File_Name
+
+[]
+	VAR->OTCurFileName = VAR->UDM_FileName
+	VAR->copy_File_Name = STRCATM(4,"cp ", VAR->xmloutputFileName, " ", VAR->OTCurFileName)
+
+[]
+
+	VAR->error = REMOVE(VAR->outputFilename )
+
+[]
+	VAR->error = REMOVE(VAR->xmloutputFileName)
+
+  }*1 .. 1 ;; |-- end Post_Processor --|
+  Process_UDM_Routing { 
+  [ VAR->lineItemCntr == 0 ]
+	CONTINUE
+
+[VAR->Ref_flag == "N"]
+
+	VAR->ES_Filename 	= STRCAT("appl/",VAR->OTCurFileName)
+	VAR->ES_Sender_ID	= VAR->Cust_Vendor_Code
+	VAR->ES_APRF 		= "udmPoV1_1" 
+	VAR->ES_Receiver_ID	= "EvolveEcc"
+	VAR->ES_SNRF = VAR->BEG_03_324_fn
+
+    VAR->ES_Routing = STRCATM(12, ":ESR:,", "b", ",",
+                          VAR->ES_Filename, ",", VAR->ES_Sender_ID, ",",
+                          VAR->ES_Receiver_ID, ",", VAR->ES_APRF, ",",
+                          VAR->ES_SNRF)
+
+        SEND_SMSG(1,VAR->ES_Routing)
+
+  }*0 .. 1 ;; |-- end Process_UDM_Routing --|
+  }*0 .. 1 ;; |-- end Final_Processing_Group_Customer --|
+[]
+
+	ARRAY->DOCUMENTREFElement_LoopCtrl       = VAR->Stop
+
+	ARRAY->DATETIMEISOElement_00002_LoopCtrl = VAR->Stop
+
+	ARRAY->POORDERLINElement_LoopCtrl        = VAR->Stop
+
+[]
+
+PERFORM("OTSrcEnd")
+
+:ERROR
+[]
+
+PERFORM("OTLGE")
+
+}*1 .. 1 ;; |-- end Msg_850_GROUP_1 --|
